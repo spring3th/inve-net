@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/intervalue-cluster/intervalue-cluster.iml" filepath="$PROJECT_DIR$/intervalue-cluster/intervalue-cluster.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intervalue-demo/intervalue-demo.iml" filepath="$PROJECT_DIR$/intervalue-demo/intervalue-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intervalue-parent.iml" filepath="$PROJECT_DIR$/intervalue-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intervalue-transport/intervalue-transport.iml" filepath="$PROJECT_DIR$/intervalue-transport/intervalue-transport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intervalue-utils/intervalue-utils.iml" filepath="$PROJECT_DIR$/intervalue-utils/intervalue-utils.iml" />
+    </modules>
+  </component>
+</project>
