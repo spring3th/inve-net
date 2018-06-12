@@ -30,6 +30,7 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
@@ -186,6 +187,7 @@ final class ClusterImpl implements Cluster {
   @Override
   public Collection<Member> otherMembers() {
     ArrayList<Member> otherMembers = new ArrayList<>(members.values());
+    otherMembers = (ArrayList<Member>) otherMembers.stream().filter(m->m.metadata().get("slice")!=null).collect(Collectors.toList());
     otherMembers.remove(membership.member());
     return Collections.unmodifiableCollection(otherMembers);
   }

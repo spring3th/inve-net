@@ -9,7 +9,6 @@ import one.inve.cluster.ClusterConfig;
 import one.inve.cluster.Member;
 
 import java.util.Map;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
