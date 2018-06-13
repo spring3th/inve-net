@@ -173,7 +173,7 @@ public interface Cluster {
   void updateMetadataProperty(String key, String value);
 
 
-  Collection<Member> findMembersBySliceId(String id);
+  Collection<Member> findMembersByShardId(String id);
 
   /**
    * Listen changes in cluster membership.

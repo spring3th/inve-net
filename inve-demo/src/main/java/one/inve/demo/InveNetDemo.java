@@ -12,7 +12,7 @@ public class InveNetDemo {
 	public static void main(String[] args) {
 		//顶层全节点
 		ClusterConfig seedConfig = ClusterConfig.builder()
-		        .listenAddress("192.168.10.129")
+		        .listenAddress("192.168.1.205")
 		        .port(20000)
 		        .build();
 		Cluster seed = Cluster.joinAwait(seedConfig);
@@ -20,18 +20,18 @@ public class InveNetDemo {
 		//局部全节点
 		ClusterConfig NodeConfig01 = ClusterConfig.builder()
 				.seedMembers(seed.address())
-		        .listenAddress("192.168.10.129")
+		        .listenAddress("192.168.1.205")
 		        .port(15001)
-		        .addMetadata("slice","01") //01分片
+		        .addMetadata("shard","01") //01分片
 		        .addMetadata("pubkey","xxxx") //公钥
 		        .build();
 		Cluster node01 = Cluster.joinAwait(NodeConfig01);
 		
 		ClusterConfig NodeConfig02 = ClusterConfig.builder()
 				.seedMembers(seed.address())
-		        .listenAddress("192.168.10.129")
+		        .listenAddress("192.168.1.205")
 		        .port(15002)
-		        .addMetadata("slice","01") //01分片
+		        .addMetadata("shard","01") //01分片
 		        .addMetadata("pubkey","xxxx") //公钥
 		        .build();
 		Cluster node02 = Cluster.joinAwait(NodeConfig02);
@@ -39,9 +39,9 @@ public class InveNetDemo {
 		
 		ClusterConfig NodeConfig03 = ClusterConfig.builder()
 				.seedMembers(seed.address())
-		        .listenAddress("192.168.10.129")
+		        .listenAddress("192.168.1.205")
 		        .port(15003)
-		        .addMetadata("slice","02") //02分片
+		        .addMetadata("shard","02") //02分片
 		        .addMetadata("pubkey","xxxx") //公钥
 		        .build();
 		Cluster node03 = Cluster.joinAwait(NodeConfig03);
@@ -54,13 +54,13 @@ public class InveNetDemo {
 		
 		System.out.println("Node03 (" + node03.address() + ") cluster: "
 		        + node03.members().stream().map(Member::toString).collect(joining("\n", "\n", "\n")));
-		System.out.println("otherMembers接口返回不包含自身的邻居列表 (" + node02.address() + ") cluster: "
+		System.out.println("otherMembers接口返回不包含自身和种子节点的邻居列表 (" + node02.address() + ") cluster: "
 		        + node02.otherMembers().stream().map(Member::toString).collect(joining("\n", "\n", "\n")));
 		
-		System.out.println("findMembersBySliceIda接口返回片内邻居 (" + node03.address() + ") cluster: "
-		        + node03.findMembersBySliceId("01").stream().map(Member::toString).collect(joining("\n", "\n", "\n")));
+		System.out.println("findMembersBySliceId接口返回指定片片内邻居不包含种子节点 (" + node03.address() + ") cluster: "
+		        + node03.findMembersByShardId("01").stream().map(Member::toString).collect(joining("\n", "\n", "\n")));
 		
-		Member member = node03.member(Address.create("192.168.10.129", 20000)).get();
+		
 		
 	}
 

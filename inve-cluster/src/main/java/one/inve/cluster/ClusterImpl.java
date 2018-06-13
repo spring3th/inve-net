@@ -187,7 +187,7 @@ final class ClusterImpl implements Cluster {
   @Override
   public Collection<Member> otherMembers() {
     ArrayList<Member> otherMembers = new ArrayList<>(members.values());
-    otherMembers = (ArrayList<Member>) otherMembers.stream().filter(m->m.metadata().get("slice")!=null).collect(Collectors.toList());
+    otherMembers = (ArrayList<Member>) otherMembers.stream().filter(m->m.metadata().get("shard")!=null).collect(Collectors.toList());
     otherMembers.remove(membership.member());
     return Collections.unmodifiableCollection(otherMembers);
   }
@@ -240,11 +240,11 @@ final class ClusterImpl implements Cluster {
   }
 
   @Override
-  public Collection<Member> findMembersBySliceId(String id){
+  public Collection<Member> findMembersByShardId(String id){
 	  
 	  Collection<Member> members = otherMembers()
                           .stream()
-                          .filter(m -> m.metadata().get("slice")!=null && m.metadata().get("slice").equals(id))
+                          .filter(m -> m.metadata().get("shard")!=null && m.metadata().get("shard").equals(id))
                           .collect(Collectors.toList());
 
     return members;
